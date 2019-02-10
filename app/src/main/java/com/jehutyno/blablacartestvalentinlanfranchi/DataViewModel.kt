@@ -11,7 +11,7 @@ import kotlinx.io.IOException
 import kotlin.coroutines.CoroutineContext
 import kotlin.properties.Delegates
 
-class DataViewModel(application: Application) : AndroidViewModel(application), CoroutineScope  {
+class DataViewModel(application: Application) : AndroidViewModel(application), CoroutineScope {
 
     private var tripsObservable by Delegates.observable<Trips?>(null) { _, oldValue, newValue ->
         if (oldValue != newValue) {
@@ -32,7 +32,7 @@ class DataViewModel(application: Application) : AndroidViewModel(application), C
     }
 
     fun getTrips() {
-        launch {
+        launch(Dispatchers.Main) {
             try {
                 val trips = withContext(Dispatchers.IO) {
                     API().getTrips()
@@ -41,21 +41,15 @@ class DataViewModel(application: Application) : AndroidViewModel(application), C
             } catch (exception: BadResponseStatusException) {
                 println(exception.response.readText())
                 listeners.forEach {
-                    withContext(Dispatchers.Main) {
-                        it.ioError(exception.message)
-                    }
+                    it.ioError(exception.message)
                 }
             } catch (exception: IOException) {
                 listeners.forEach {
-                    withContext(Dispatchers.Main) {
-                        it.ioError(exception.message)
-                    }
+                    it.ioError(exception.message)
                 }
             } catch (exception: Exception) {
                 listeners.forEach {
-                    withContext(Dispatchers.Main) {
-                        it.ioError(exception.message)
-                    }
+                    it.ioError(exception.message)
                 }
             }
         }

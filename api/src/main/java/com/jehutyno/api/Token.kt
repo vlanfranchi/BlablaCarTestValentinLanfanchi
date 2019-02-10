@@ -1,6 +1,12 @@
 package com.jehutyno.api
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Token(val access_token: String, val token_type: String, val issued_at: Long, val expires_in: Long, val scopes: List<String>)
+data class Token(
+    @SerialName("access_token") val accessToken: String,
+    @SerialName("token_type") val tokenType: String,
+    @SerialName("issued_at") val issuedAt: Long,
+    @SerialName("expires_in") val expiresIn: Long,
+    @SerialName("scopes") val scopes: List<String>)
