@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">BlablaCarTestValentinLanfranchi</string>
+    <string name="find_journey">Trouver un trajet</string>
+    <string name="departure">Départ</string>
+    <string name="destination">Déstination</string>
 </resources>
