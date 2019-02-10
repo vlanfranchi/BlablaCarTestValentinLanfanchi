@@ -5,12 +5,13 @@ import android.arch.lifecycle.AndroidViewModel
 import com.jehutyno.api.API
 import com.jehutyno.api.Trips
 import kotlinx.coroutines.*
+import kotlinx.io.IOException
 import kotlin.coroutines.CoroutineContext
 import kotlin.properties.Delegates
 
 class DataViewModel(application: Application) : AndroidViewModel(application), CoroutineScope by MainScope() {
 
-    private var plop by Delegates.observable<Trips?>(null) { _, oldValue, newValue ->
+    private var tripsObservable by Delegates.observable<Trips?>(null) { _, oldValue, newValue ->
         if (oldValue != newValue) {
             listeners.forEach {
                 it.tripsChanged(newValue)
@@ -30,14 +31,30 @@ class DataViewModel(application: Application) : AndroidViewModel(application), C
 
     fun getTrips() {
         launch {
-            val trips = withContext(Dispatchers.IO) {
-                API().getTrips()
+            try {
+                val trips = withContext(Dispatchers.IO) {
+                    API().getTrips()
+                }
+                tripsObservable = trips
+            } catch (exception: IOException) {
+                listeners.forEach {
+                    withContext(Dispatchers.Main) {
+                        it.ioError(exception.message)
+                    }
+                }
+            } catch (exception: Exception) {
+                listeners.forEach {
+                    withContext(Dispatchers.Main) {
+                        it.ioError(exception.message)
+                    }
+                }
             }
-            plop = trips
         }
     }
 }
 
 interface TripsListener {
     fun tripsChanged(trips: Trips?)
+    fun ioError(message: String?)
+    fun unknownError(message: String?)
 }

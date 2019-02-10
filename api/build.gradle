@@ -7,4 +7,5 @@ dependencies {
     api "io.ktor:ktor-client-core-jvm:1.1.2"
     api "io.ktor:ktor-client-json-jvm:1.1.2"
     api "io.ktor:ktor-client-logging-jvm:1.1.2"
+    implementation 'org.slf4j:slf4j-nop:1.7.25'
 }
