@@ -4,12 +4,14 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import com.jehutyno.api.API
 import com.jehutyno.api.Trips
+import io.ktor.client.features.BadResponseStatusException
+import io.ktor.client.response.readText
 import kotlinx.coroutines.*
 import kotlinx.io.IOException
 import kotlin.coroutines.CoroutineContext
 import kotlin.properties.Delegates
 
-class DataViewModel(application: Application) : AndroidViewModel(application), CoroutineScope by MainScope() {
+class DataViewModel(application: Application) : AndroidViewModel(application), CoroutineScope  {
 
     private var tripsObservable by Delegates.observable<Trips?>(null) { _, oldValue, newValue ->
         if (oldValue != newValue) {
@@ -36,6 +38,13 @@ class DataViewModel(application: Application) : AndroidViewModel(application), C
                     API().getTrips()
                 }
                 tripsObservable = trips
+            } catch (exception: BadResponseStatusException) {
+                println(exception.response.readText())
+                listeners.forEach {
+                    withContext(Dispatchers.Main) {
+                        it.ioError(exception.message)
+                    }
+                }
             } catch (exception: IOException) {
                 listeners.forEach {
                     withContext(Dispatchers.Main) {
