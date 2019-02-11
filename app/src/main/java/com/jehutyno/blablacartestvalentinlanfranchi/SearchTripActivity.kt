@@ -1,31 +1,25 @@
 package com.jehutyno.blablacartestvalentinlanfranchi
 
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import com.jehutyno.api.Trips
 import kotlinx.android.synthetic.main.search_activity.*
 
 
-class SearchTripActivity: AppCompatActivity(), TripsListener {
+class SearchTripActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_activity)
-        val viewModel = ViewModelProviders.of(this).get(DataViewModel::class.java)
-        viewModel.getTrips()
-        viewModel.listeners += this
+
+        search.setOnClickListener {
+            if (departure.text.isNotBlank() && destination.text.isNotBlank()) {
+                startActivity(TripsResultActivity.intent(this, departure.text.toString(), destination.text.toString()))
+            } else {
+                Snackbar.make(searchRoot, getString(R.string.error_search_empty), Snackbar.LENGTH_SHORT).show()
+            }
+        }
+
     }
 
-    override fun tripsChanged(trips: Trips?) {
-        println(trips)
-    }
-
-    override fun ioError(message: String?) {
-        messageTv.text = message
-    }
-
-    override fun unknownError(message: String?) {
-        messageTv.text = message
-    }
 }

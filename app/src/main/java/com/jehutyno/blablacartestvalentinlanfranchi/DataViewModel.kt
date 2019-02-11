@@ -40,15 +40,11 @@ class DataViewModel(application: Application) : AndroidViewModel(application), C
             } catch (exception: BadResponseStatusException) {
                 println(exception.response.readText())
                 listeners.forEach {
-                    it.ioError(exception.message)
+                    it.onError(exception.message)
                 }
             } catch (exception: IOException) {
                 listeners.forEach {
-                    it.ioError(exception.message)
-                }
-            } catch (exception: Exception) {
-                listeners.forEach {
-                    it.ioError(exception.message)
+                    it.onError(exception.message)
                 }
             }
         }
@@ -57,6 +53,5 @@ class DataViewModel(application: Application) : AndroidViewModel(application), C
 
 interface TripsListener {
     fun tripsChanged(trips: Trips?)
-    fun ioError(message: String?)
-    fun unknownError(message: String?)
+    fun onError(message: String?)
 }

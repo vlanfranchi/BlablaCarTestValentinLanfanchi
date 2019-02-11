@@ -3,4 +3,5 @@
     <string name="find_journey">Trouver un trajet</string>
     <string name="departure">Départ</string>
     <string name="destination">Déstination</string>
+    <string name="error_search_empty">Le départ et la destination ne doivent pas être vides</string>
 </resources>
