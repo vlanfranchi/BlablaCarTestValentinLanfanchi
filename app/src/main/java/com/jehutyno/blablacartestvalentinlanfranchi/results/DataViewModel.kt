@@ -1,8 +1,9 @@
-package com.jehutyno.blablacartestvalentinlanfranchi
+package com.jehutyno.blablacartestvalentinlanfranchi.results
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import com.jehutyno.api.model.Trips
+import com.jehutyno.blablacartestvalentinlanfranchi.AndroidApp
 import io.ktor.client.features.BadResponseStatusException
 import io.ktor.client.response.readText
 import kotlinx.coroutines.*

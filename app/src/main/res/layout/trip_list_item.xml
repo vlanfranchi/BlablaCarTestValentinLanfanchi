@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:padding="12dp"
+        android:background="@drawable/item_bg"
+        android:layout_width="match_parent" android:layout_height="wrap_content">
+
+    <TextView
+            android:id="@+id/departureTime"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/price"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="0dp"
+            android:padding="8dp"
+            style="@style/Text.Bold"
+            tools:text="28/02/2019 11:00:00"
+            android:layout_height="wrap_content"/>
+
+    <TextView
+            android:id="@+id/locations"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/departureTime"
+            android:layout_width="0dp"
+            android:padding="8dp"
+            android:gravity="center"
+            style="@style/Text.Bold"
+            tools:text="Paris - Rennes"
+            android:layout_height="wrap_content"/>
+
+    <TextView
+            android:id="@+id/price"
+            app:layout_constraintStart_toEndOf="@id/departureTime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:padding="8dp"
+            style="@style/Text.Bold"
+            tools:text="38 $"
+            android:layout_height="wrap_content"/>
+
+
+</android.support.constraint.ConstraintLayout>

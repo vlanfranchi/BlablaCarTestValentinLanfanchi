@@ -1,4 +1,4 @@
-package com.jehutyno.blablacartestvalentinlanfranchi
+package com.jehutyno.blablacartestvalentinlanfranchi.results
 
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
@@ -6,9 +6,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.jehutyno.api.model.Trips
+import com.jehutyno.blablacartestvalentinlanfranchi.R
 import kotlinx.android.synthetic.main.trips_activity.*
 
-class TripsResultActivity: AppCompatActivity(), TripsListener  {
+class TripsResultActivity: AppCompatActivity(), TripsListener {
 
     companion object {
         private const val INTENT_DEPARTURE = "intent_departure"
