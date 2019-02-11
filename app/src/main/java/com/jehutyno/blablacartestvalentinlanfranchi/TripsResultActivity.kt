@@ -6,7 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.jehutyno.api.Trips
-import kotlinx.android.synthetic.main.search_activity.*
+import kotlinx.android.synthetic.main.trips_activity.*
 
 class TripsResultActivity: AppCompatActivity(), TripsListener  {
 
@@ -24,8 +24,15 @@ class TripsResultActivity: AppCompatActivity(), TripsListener  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.trips_activity)
+
+        val departure = intent.getStringExtra(INTENT_DEPARTURE)
+        val destination = intent.getStringExtra(INTENT_DESTINATION)
+
+        titleTv.text = getString(R.string.trips_title, departure, destination)
+
         val viewModel = ViewModelProviders.of(this).get(DataViewModel::class.java)
-        viewModel.getTrips(intent.getStringExtra(INTENT_DEPARTURE), intent.getStringExtra(INTENT_DESTINATION))
+        viewModel.getTrips(departure, destination)
         viewModel.listeners += this
     }
 

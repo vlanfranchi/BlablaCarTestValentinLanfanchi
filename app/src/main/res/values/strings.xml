@@ -4,4 +4,5 @@
     <string name="departure">Départ</string>
     <string name="destination">Déstination</string>
     <string name="error_search_empty">Le départ et la destination ne doivent pas être vides</string>
+    <string name="trips_title">%1$s ➡ %2$s</string>
 </resources>
