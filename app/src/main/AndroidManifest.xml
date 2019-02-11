@@ -20,7 +20,13 @@
                 <action android:name="android.intent.action.VIEW"/>
             </intent-filter>
         </activity>
-        <activity android:name=".results.TripsResultActivity"/>
+        <activity android:name=".results.TripsResultActivity"
+                  android:allowTaskReparenting="true"
+                  android:parentActivityName="com.jehutyno.blablacartestvalentinlanfranchi.search.SearchTripActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.jehutyno.blablacartestvalentinlanfranchi.search.SearchTripActivity"/>
+        </activity>
 
 
     </application>
