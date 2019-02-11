@@ -1,4 +1,4 @@
-package com.jehutyno.api
+package com.jehutyno.api.model
 
 import kotlinx.serialization.Serializable
 

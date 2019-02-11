@@ -1,5 +1,7 @@
 package com.jehutyno.api
 
+import com.jehutyno.api.model.Token
+import com.jehutyno.api.model.Trips
 import io.ktor.client.HttpClient
 import io.ktor.client.features.BadResponseStatusException
 import io.ktor.client.features.DefaultRequest

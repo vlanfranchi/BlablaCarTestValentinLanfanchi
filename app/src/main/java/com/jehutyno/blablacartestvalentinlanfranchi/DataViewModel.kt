@@ -2,7 +2,7 @@ package com.jehutyno.blablacartestvalentinlanfranchi
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
-import com.jehutyno.api.Trips
+import com.jehutyno.api.model.Trips
 import io.ktor.client.features.BadResponseStatusException
 import io.ktor.client.response.readText
 import kotlinx.coroutines.*

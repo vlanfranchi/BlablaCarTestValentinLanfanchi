@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.jehutyno.api.Trips
+import com.jehutyno.api.model.Trips
 import kotlinx.android.synthetic.main.trips_activity.*
 
 class TripsResultActivity: AppCompatActivity(), TripsListener  {
