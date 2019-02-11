@@ -2,7 +2,6 @@ package com.jehutyno.blablacartestvalentinlanfranchi
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
-import com.jehutyno.api.API
 import com.jehutyno.api.Trips
 import io.ktor.client.features.BadResponseStatusException
 import io.ktor.client.response.readText
@@ -35,7 +34,7 @@ class DataViewModel(application: Application) : AndroidViewModel(application), C
         launch(Dispatchers.Main) {
             try {
                 val trips = withContext(Dispatchers.IO) {
-                    API().getTrips()
+                    getApplication<AndroidApp>().api.getTrips()
                 }
                 tripsObservable = trips
             } catch (exception: BadResponseStatusException) {
