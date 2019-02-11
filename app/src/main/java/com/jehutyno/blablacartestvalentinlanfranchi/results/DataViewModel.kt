@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import com.jehutyno.api.model.Trips
 import com.jehutyno.blablacartestvalentinlanfranchi.AndroidApp
+import com.jehutyno.blablacartestvalentinlanfranchi.search.TripItem
 import io.ktor.client.features.BadResponseStatusException
 import io.ktor.client.response.readText
 import kotlinx.coroutines.*
@@ -16,7 +17,7 @@ class DataViewModel(application: Application) : AndroidViewModel(application), C
     private var tripsObservable by Delegates.observable<Trips?>(null) { _, oldValue, newValue ->
         if (oldValue != newValue) {
             listeners.forEach {
-                it.tripsChanged(newValue)
+                it.tripsChanged(TripConverter.convert(newValue?.trips))
             }
         }
     }
@@ -53,6 +54,6 @@ class DataViewModel(application: Application) : AndroidViewModel(application), C
 }
 
 interface TripsListener {
-    fun tripsChanged(trips: Trips?)
+    fun tripsChanged(trips: List<TripItem>?)
     fun onError(message: String?)
 }

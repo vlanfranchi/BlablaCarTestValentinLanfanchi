@@ -5,8 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.jehutyno.api.model.Trips
+import android.support.v7.widget.LinearLayoutManager
 import com.jehutyno.blablacartestvalentinlanfranchi.R
+import com.jehutyno.blablacartestvalentinlanfranchi.search.TripItem
+import com.jehutyno.blablacartestvalentinlanfranchi.search.TripsAdapter
 import kotlinx.android.synthetic.main.trips_activity.*
 
 class TripsResultActivity: AppCompatActivity(), TripsListener {
@@ -23,6 +25,8 @@ class TripsResultActivity: AppCompatActivity(), TripsListener {
         }
     }
 
+    private val tripsAdapter by lazy { TripsAdapter(this) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.trips_activity)
@@ -31,13 +35,18 @@ class TripsResultActivity: AppCompatActivity(), TripsListener {
         val destination = intent.getStringExtra(INTENT_DESTINATION)
 
         titleTv.text = getString(R.string.trips_title, departure, destination)
+        tripList.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = tripsAdapter
+        }
 
         val viewModel = ViewModelProviders.of(this).get(DataViewModel::class.java)
         viewModel.getTrips(departure, destination)
         viewModel.listeners += this
     }
 
-    override fun tripsChanged(trips: Trips?) {
+    override fun tripsChanged(trips: List<TripItem>?) {
+        tripsAdapter.update(trips)
         println(trips)
     }
 
