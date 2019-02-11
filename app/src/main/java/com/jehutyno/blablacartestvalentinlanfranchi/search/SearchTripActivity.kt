@@ -13,7 +13,7 @@ class SearchTripActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_activity)
-
+        title = getString(R.string.search_title)
         search.setOnClickListener {
             if (departure.text.isNotBlank() && destination.text.isNotBlank()) {
                 startActivity(

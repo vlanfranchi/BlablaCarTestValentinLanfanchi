@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.jehutyno.blablacartestvalentinlanfranchi.R
+import com.jehutyno.blablacartestvalentinlanfranchi.view.CircleTransform
+import com.squareup.picasso.Picasso
 
 class TripsAdapter(private val context: Context): RecyclerView.Adapter<TripViewHolder>() {
 
@@ -22,6 +24,8 @@ class TripsAdapter(private val context: Context): RecyclerView.Adapter<TripViewH
         holder.departureTime.text = items[position].departureTime
         holder.locations.text = items[position].locations.joinToString(" - ")
         holder.price.text = items[position].price
+        holder.userName.text = items[position].userName
+        Picasso.get().load(items[position].userPictureUrl).transform(CircleTransform()).into(holder.userPicture)
     }
 
     fun update(items: List<TripItem>?) {

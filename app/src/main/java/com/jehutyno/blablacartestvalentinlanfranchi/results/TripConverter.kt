@@ -10,7 +10,9 @@ object TripConverter : Converter<Trip, TripItem> {
        return TripItem(
            departureTime = input.departureDate,
            locations = input.locationsToDisplay,
-           price = input.price.string
+           price = input.price.string,
+           userName = input.user.displayName,
+           userPictureUrl = input.user.picture
        )
     }
 }

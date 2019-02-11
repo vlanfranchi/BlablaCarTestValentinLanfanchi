@@ -32,7 +32,7 @@ class TripsResultActivity: AppCompatActivity(), TripsListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.trips_activity)
-
+        title = getString(R.string.results_title)
         val departure = intent.getStringExtra(INTENT_DEPARTURE)
         val destination = intent.getStringExtra(INTENT_DESTINATION)
 

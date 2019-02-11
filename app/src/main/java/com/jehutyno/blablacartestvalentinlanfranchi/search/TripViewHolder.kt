@@ -9,5 +9,7 @@ class TripViewHolder(view: View): RecyclerView.ViewHolder(view) {
     val departureTime = view.departureTime
     val locations = view.locations
     val price = view.price
+    val userName = view.userName
+    val userPicture = view.userPicture
 
 }

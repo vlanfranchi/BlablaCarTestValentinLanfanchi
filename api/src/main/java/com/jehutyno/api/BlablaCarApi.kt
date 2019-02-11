@@ -11,10 +11,12 @@ import io.ktor.client.features.logging.LogLevel
 import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.features.logging.SIMPLE
+import io.ktor.client.features.observer.ResponseObserver
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
+import io.ktor.client.response.readText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.TextContent
@@ -22,7 +24,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 
 
-class API {
+class BlablaCarApi {
 
     var token: Token? = null
 
@@ -44,6 +46,9 @@ class API {
             level = LogLevel.INFO
             logger = Logger.SIMPLE
         }
+        ResponseObserver {
+            println(it.readText())
+        }
     }
 
     suspend fun getToken(): Token {
@@ -59,6 +64,7 @@ class API {
 
     suspend fun getTrips(departure: String, destination: String): Trips {
         return oAuth(0) {
+            println(token?.accessToken)
             http.get<Trips>("https://edge.blablacar.com/api/v2/trips") {
                 header("Authorization", "Bearer " + token?.accessToken)
                 parameter("_format", "json")

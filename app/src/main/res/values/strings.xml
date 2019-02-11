@@ -6,4 +6,6 @@
     <string name="error_search_empty">Le départ et la destination ne doivent pas être vides</string>
     <string name="trips_title">%1$s ➡ %2$s</string>
     <string name="search">rechercher</string>
+    <string name="search_title">BlablaCar Test</string>
+    <string name="results_title">Résultats</string>
 </resources>
