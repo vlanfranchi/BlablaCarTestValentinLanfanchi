@@ -6,6 +6,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import com.jehutyno.blablacartestvalentinlanfranchi.R
 import com.jehutyno.blablacartestvalentinlanfranchi.search.TripItem
 import com.jehutyno.blablacartestvalentinlanfranchi.search.TripsAdapter
@@ -40,17 +42,19 @@ class TripsResultActivity: AppCompatActivity(), TripsListener {
             adapter = tripsAdapter
         }
 
+        progress.visibility = VISIBLE
         val viewModel = ViewModelProviders.of(this).get(DataViewModel::class.java)
         viewModel.getTrips(departure, destination)
         viewModel.listeners += this
     }
 
     override fun tripsChanged(trips: List<TripItem>?) {
+        progress.visibility = GONE
         tripsAdapter.update(trips)
-        println(trips)
     }
 
     override fun onError(message: String?) {
+        progress.visibility = GONE
         messageTv.text = message
     }
 
