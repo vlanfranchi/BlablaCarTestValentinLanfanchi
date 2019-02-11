@@ -11,8 +11,8 @@ import kotlinx.android.synthetic.main.search_activity.*
 class TripsResultActivity: AppCompatActivity(), TripsListener  {
 
     companion object {
-        private val INTENT_DEPARTURE = "intent_departure"
-        private val INTENT_DESTINATION = "intent_destination"
+        private const val INTENT_DEPARTURE = "intent_departure"
+        private const val INTENT_DESTINATION = "intent_destination"
 
         fun intent(context: Context, departure: String, destination: String): Intent {
             return Intent(context, TripsResultActivity::class.java).apply {
@@ -25,7 +25,7 @@ class TripsResultActivity: AppCompatActivity(), TripsListener  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val viewModel = ViewModelProviders.of(this).get(DataViewModel::class.java)
-        viewModel.getTrips()
+        viewModel.getTrips(intent.getStringExtra(INTENT_DEPARTURE), intent.getStringExtra(INTENT_DESTINATION))
         viewModel.listeners += this
     }
 

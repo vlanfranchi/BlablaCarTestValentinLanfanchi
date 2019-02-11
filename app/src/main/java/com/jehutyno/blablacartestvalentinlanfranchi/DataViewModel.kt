@@ -30,11 +30,11 @@ class DataViewModel(application: Application) : AndroidViewModel(application), C
         listeners.clear()
     }
 
-    fun getTrips() {
+    fun getTrips(departure: String, destination: String) {
         launch(Dispatchers.Main) {
             try {
                 val trips = withContext(Dispatchers.IO) {
-                    getApplication<AndroidApp>().api.getTrips()
+                    getApplication<AndroidApp>().api.getTrips(departure, destination)
                 }
                 tripsObservable = trips
             } catch (exception: BadResponseStatusException) {

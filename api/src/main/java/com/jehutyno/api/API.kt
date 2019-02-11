@@ -55,15 +55,15 @@ class API {
         }
     }
 
-    suspend fun getTrips(): Trips {
+    suspend fun getTrips(departure: String, destination: String): Trips {
         return oAuth(0) {
             http.get<Trips>("https://edge.blablacar.com/api/v2/trips") {
                 header("Authorization", "Bearer " + token?.accessToken)
                 parameter("_format", "json")
                 parameter("locale", "fr_FR")
                 parameter("cur", "EUR")
-                parameter("fn", "Paris")
-                parameter("tn", "Rennes")
+                parameter("fn", departure)
+                parameter("tn", destination)
             }
         }
     }
